@@ -1,0 +1,55 @@
+.section {
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.section-header {
+  margin-bottom: 60px;
+  max-width: 720px;
+}
+
+.section-header.text-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-badge {
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.section-description {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+  .section-title {
+    font-size: 2rem;
+  }
+  .section-description {
+    font-size: 1rem;
+  }
+}

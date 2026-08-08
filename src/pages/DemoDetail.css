@@ -1,0 +1,389 @@
+.demo-detail-page {
+  background-color: var(--bg-main);
+  min-height: 100vh;
+}
+
+.niche-site-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Niche Site Header */
+.niche-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.niche-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.niche-logo-mark {
+  background-color: var(--accent-color);
+  color: #000;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.niche-logo-text {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.niche-nav {
+  display: flex;
+  gap: 24px;
+}
+
+.niche-nav a {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.niche-nav a:hover {
+  color: var(--text-primary);
+}
+
+.niche-header-action {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.niche-cart-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+/* Niche Hero */
+.niche-hero {
+  padding: 60px 0 80px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.niche-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.niche-hero-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.niche-hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.niche-hero-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.niche-features-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.niche-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+}
+
+.pill-check {
+  color: var(--accent-color);
+}
+
+.niche-hero-media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  height: 380px;
+}
+
+.niche-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Niche Section */
+.niche-section {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.niche-section-alt {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.niche-section-header {
+  margin-bottom: 40px;
+}
+
+.niche-section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.niche-section-desc {
+  color: var(--text-secondary);
+}
+
+.niche-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.niche-product-card {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.niche-card-img-box {
+  position: relative;
+  height: 180px;
+}
+
+.niche-card-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-tag-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--accent-color);
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.niche-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.product-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.product-price {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent-color);
+}
+
+/* Modules Stack */
+.niche-list-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.module-item-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.mod-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.mod-info {
+  flex: 1;
+}
+
+.mod-info h4 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.mod-dur {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Doctors Grid */
+.doctor-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.doctor-avatar {
+  width: 64px;
+  height: 64px;
+  background: var(--accent-subtle);
+  color: var(--accent-color);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.doctor-spec {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.doctor-exp {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* Services */
+.service-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.service-icon {
+  color: var(--accent-color);
+}
+
+/* Reviews */
+.niche-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.review-stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.star-filled {
+  color: #f59e0b;
+  fill: #f59e0b;
+}
+
+.review-text {
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.review-author {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Lead Box */
+.niche-lead-box {
+  background: linear-gradient(135deg, #121215 0%, var(--bg-surface) 100%);
+  border-color: rgba(56, 189, 248, 0.3);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.niche-lead-info h3 {
+  font-size: 1.75rem;
+  margin-bottom: 8px;
+}
+
+.niche-lead-info p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.niche-lead-contacts {
+  display: flex;
+  gap: 24px;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+}
+
+.niche-lead-contacts span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 1024px) {
+  .niche-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .niche-nav {
+    display: none;
+  }
+  .niche-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .niche-cards-grid, .niche-reviews-grid {
+    grid-template-columns: 1fr;
+  }
+  .niche-lead-box {
+    flex-direction: column;
+    text-align: center;
+  }
+}

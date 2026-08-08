@@ -1,16 +1,52 @@
-# React + Vite
+# Digital Agency Portfolio & Demo Showcase
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Современный сайт-портфолио digital-агентства в стиле тёмного минимализма (#0a0a0a), выполненный на React + Vite с маршрутизацией, адаптивным дизайном и интерактивными демо-шаблонами для различных ниш бизнеса.
 
-Currently, two official plugins are available:
+## Особенности проекта
+- **Стиль**: Тёмный минимализм (#0a0a0a), акцентный цвет (#38bdf8), современная типографика, плавающие микро-анимации и изящные тонкие разделители.
+- **Главная страница**: Hero-секция с УТП, интерактивный блок "Как мы работаем" (4 шага), превью реальных проектов и категорий демо-макетов.
+- **Страница "Портфолио"**: Сетка карточек реальных проектов с тегами, описанием и ссылками + плейсхолдеры для добавления новых работ.
+- **Страница "Демо-примеры"**: Раздел с категориями нишевых решений (Интернет-магазин, Курсы/EdTech, Сайт услуг, Клиника, Клининг).
+- **Демо-страницы ниш (`/demo/:niche`)**: Полноценные одностраничные сайты под каждую нишу с верхней плашкой-уведомлением ("Готовое решение" vs "Кастомный дизайн", приписка о точной стоимости и кнопка заявки).
+- **Форма контактов**: Модальное окно и блок заявки с полями Имя, Ниша, Telegram/Телефон, Бюджет и прямыми ссылками на Telegram / WhatsApp.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Технологический стек
+- React 18
+- Vite
+- React Router DOM v6
+- Lucide React (иконки)
+- Vanilla CSS (CSS variables, BEM-like структура)
 
-## React Compiler
+## Требования для запуска
+- Node.js >= 18.x
+- npm >= 9.x
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Инструкция по запуску
 
-## Expanding the Oxlint configuration
+1. **Установка зависимостей**:
+   ```bash
+   npm install
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+2. **Запуск сервера разработки**:
+   ```bash
+   npm run dev
+   ```
+   Откройте [http://localhost:5173](http://localhost:5173) в браузере.
+
+3. **Сборка для продакшена**:
+   ```bash
+   npm run build
+   ```
+
+## Структура проекта
+```
+src/
+  components/       # переиспользуемые UI-компоненты (Button, Card, Section, Header, Footer, ContactModal)
+  demo/             # специализированные компоненты демо-решений (DemoBanner)
+  pages/            # страницы приложения (Home, Portfolio, DemoList, DemoDetail)
+  data/             # данные проектов, категорий и контента
+  styles/           # глобальные переменные и стили (variables.css)
+  App.jsx           # конфигурация роутера и модального окна
+  main.jsx          # точка входа
+```
