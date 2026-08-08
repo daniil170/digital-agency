@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, ShieldCheck, Sparkles, Star } from 'lucide-react';
+import { ArrowRight, CheckCircle, ShieldCheck, Sparkles, Star, Zap } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { Section } from '../components/ui/Section';
