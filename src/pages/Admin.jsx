@@ -1,18 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  ShieldCheck, RefreshCw, Send, MessageSquare, Clock, 
-  CheckCircle2, AlertCircle, Filter, Phone, UserCheck
+  ShieldCheck, RefreshCw, Send, Lock, Clock, 
+  CheckCircle2, AlertCircle, Filter, LogOut, KeyRound
 } from 'lucide-react';
-import { fetchLeads, updateLeadStatus } from '../firebase/config';
+import { 
+  fetchLeads, updateLeadStatus, checkIsAdminAuthenticated, loginAdmin, logoutAdmin 
+} from '../firebase/config';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Section } from '../components/ui/Section';
 import './Admin.css';
 
 export const Admin = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [pinInput, setPinInput] = useState('');
+  const [pinError, setPinError] = useState(false);
+
   const [leads, setLeads] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [statusFilter, setStatusFilter] = useState('all');
+
+  useEffect(() => {
+    const authState = checkIsAdminAuthenticated();
+    setIsAuthenticated(authState);
+    if (authState) {
+      loadLeads();
+    }
+  }, []);
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    const success = loginAdmin(pinInput);
+    if (success) {
+      setIsAuthenticated(true);
+      setPinError(false);
+      loadLeads();
+    } else {
+      setPinError(true);
+    }
+  };
+
+  const handleLogout = () => {
+    logoutAdmin();
+    setIsAuthenticated(false);
+    setPinInput('');
+  };
 
   const loadLeads = async () => {
     setLoading(true);
@@ -20,10 +52,6 @@ export const Admin = () => {
     setLeads(data);
     setLoading(false);
   };
-
-  useEffect(() => {
-    loadLeads();
-  }, []);
 
   const handleStatusChange = async (leadId, newStatus) => {
     const updated = await updateLeadStatus(leadId, newStatus);
@@ -64,15 +92,68 @@ export const Admin = () => {
     return `https://t.me/cunicad`;
   };
 
+  // If NOT Authenticated: Show PIN Login Form
+  if (!isAuthenticated) {
+    return (
+      <div className="admin-page">
+        <Section id="admin-login" className="admin-login-section">
+          <Card className="admin-login-card">
+            <div className="admin-login-header">
+              <div className="lock-icon-circle">
+                <Lock size={28} />
+              </div>
+              <h2>Защищенный вход в админку</h2>
+              <p>WEBORA AGENCY — Панель управления лидами</p>
+            </div>
+
+            <form onSubmit={handleLoginSubmit} className="admin-login-form">
+              <div className="form-group">
+                <label htmlFor="adminPin">Введите PIN-код доступа:</label>
+                <input 
+                  type="password" 
+                  id="adminPin"
+                  required
+                  placeholder="****"
+                  value={pinInput}
+                  onChange={(e) => {
+                    setPinInput(e.target.value);
+                    setPinError(false);
+                  }}
+                />
+              </div>
+
+              {pinError && (
+                <p className="pin-error-msg">
+                  Неверный PIN-код доступа! Обратитесь к администратору @cunicad.
+                </p>
+              )}
+
+              <Button type="submit" variant="primary" icon={KeyRound} className="w-100">
+                Войти в систему
+              </Button>
+            </form>
+          </Card>
+        </Section>
+      </div>
+    );
+  }
+
+  // If Authenticated: Show Admin Dashboard
   return (
     <div className="admin-page">
       <Section
         id="admin-dashboard"
-        badge="Firebase CRM / Admin"
-        title="Панель управления лидами (Казахстан)"
-        description="Входные заявки с сайта, сохраненные в базе данных Cloud Firestore. Вы можете отслеживать статус клиентов и переходить к чатам."
+        badge="Защищенный доступ"
+        title="Панель управления лидами (WEBORA)"
+        description="Конфиденциальный список клиентов и заявок с вашего сайта. Доступ разрешен только администратору."
         className="admin-section"
       >
+        <div className="admin-top-action-bar">
+          <Button variant="outline" size="small" icon={LogOut} onClick={handleLogout}>
+            Выйти из админки
+          </Button>
+        </div>
+
         <div className="admin-controls">
           <div className="admin-stats-summary">
             <div className="stat-card">

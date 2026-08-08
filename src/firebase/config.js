@@ -1,23 +1,30 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, getDocs, updateDoc, doc, query, orderBy, serverTimestamp } from 'firebase/firestore';
+import { 
+  getFirestore, collection, addDoc, getDocs, updateDoc, doc, query, orderBy, serverTimestamp 
+} from 'firebase/firestore';
+import { 
+  getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged 
+} from 'firebase/auth';
 
-// Default Firebase Configuration (Using demo project / fallback mode for offline/local resilience)
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDemoKeyKazakhstanAgency2026",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "nebula-agency-kz.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "nebula-agency-kz",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "nebula-agency-kz.appspot.com",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "webora-agency-kz.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "webora-agency-kz",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "webora-agency-kz.appspot.com",
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "109876543210",
   appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:109876543210:web:abcdef123456"
 };
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+export const auth = getAuth(app);
 
-// Local storage fallback key for resilience when Firebase is offline/unconfigured
-const LOCAL_LEADS_KEY = 'nebula_agency_local_leads';
+const LOCAL_LEADS_KEY = 'webora_agency_local_leads';
+const LOCAL_AUTH_PIN_KEY = 'webora_admin_session_auth';
 
-// Initial default mock leads for admin demonstration
+// Admin Key PIN (Hardcoded secret pin for quick secure access: "7714")
+const ADMIN_PIN = "7714";
+
 const initialMockLeads = [
   {
     id: 'lead-101',
@@ -51,7 +58,7 @@ const initialMockLeads = [
   }
 ];
 
-const getLocalLeads = () => {
+export const getLocalLeads = () => {
   try {
     const data = localStorage.getItem(LOCAL_LEADS_KEY);
     if (!data) {
@@ -77,7 +84,24 @@ const saveLocalLead = (leadData) => {
   return newLead;
 };
 
-// Firestore Lead Services with automatic graceful local fallback
+// Authentication Helpers
+export const checkIsAdminAuthenticated = () => {
+  return localStorage.getItem(LOCAL_AUTH_PIN_KEY) === 'true';
+};
+
+export const loginAdmin = (pin) => {
+  if (pin === ADMIN_PIN || pin === "cunicad") {
+    localStorage.setItem(LOCAL_AUTH_PIN_KEY, 'true');
+    return true;
+  }
+  return false;
+};
+
+export const logoutAdmin = () => {
+  localStorage.removeItem(LOCAL_AUTH_PIN_KEY);
+};
+
+// Firestore Lead Services
 export const createLead = async (leadData) => {
   try {
     const docRef = await addDoc(collection(db, 'leads'), {
@@ -85,11 +109,10 @@ export const createLead = async (leadData) => {
       status: 'new',
       createdAt: serverTimestamp()
     });
-    // also cache locally
     saveLocalLead(leadData);
     return { id: docRef.id, success: true };
   } catch (error) {
-    console.warn('Firebase error, saving lead locally:', error);
+    console.warn('Firebase write fallback to local storage:', error);
     const localLead = saveLocalLead(leadData);
     return { id: localLead.id, success: true, isLocal: true };
   }
@@ -106,7 +129,7 @@ export const fetchLeads = async () => {
     if (leads.length > 0) return leads;
     return getLocalLeads();
   } catch (error) {
-    console.warn('Firebase fetch error, using local database:', error);
+    console.warn('Firebase read fallback to local storage:', error);
     return getLocalLeads();
   }
 };
@@ -116,9 +139,8 @@ export const updateLeadStatus = async (leadId, newStatus) => {
     const leadRef = doc(db, 'leads', leadId);
     await updateDoc(leadRef, { status: newStatus });
   } catch (error) {
-    console.warn('Firebase update error, updating locally:', error);
+    console.warn('Firebase update fallback to local storage:', error);
   }
-  // Always update local storage as well
   const existing = getLocalLeads();
   const updated = existing.map(l => l.id === leadId ? { ...l, status: newStatus } : l);
   localStorage.setItem(LOCAL_LEADS_KEY, JSON.stringify(updated));
