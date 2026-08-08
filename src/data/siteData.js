@@ -1,78 +1,78 @@
-// Mock data for real agency projects
+// Mock data for real agency projects in Kazakhstan
 export const realProjects = [
   {
-    id: 'cyber-store',
-    title: 'AURA TECH',
-    category: 'E-Commerce / Электроника',
-    description: 'Минималистичный интернет-магазин премиальной электроники с быстрым оформлением и 3D-интерактивностью.',
-    image: 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?q=80&w=1000&auto=format&fit=crop',
-    tags: ['E-Commerce', 'React', 'Animation', 'PaySystem'],
-    link: 'https://example.com/aura-tech',
+    id: 'yourwayy-ai',
+    title: 'YOURWAYY',
+    category: 'EdTech / AI-Платформа курсов',
+    description: 'Интеллектуальная образовательная платформа, которая генерирует интерактивные курсы и строит граф знаний для каждого студента.',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop',
+    tags: ['AI Courses', 'React', 'Interactive Graphs', 'EdTech'],
+    link: 'https://beta.yourwayy.co',
     isReal: true
   },
   {
-    id: 'fintech-app',
-    title: 'NEXUS CAPITAL',
-    category: 'Финансовый сервис / SaaS',
-    description: 'Корпоративный сайт инвестиционной платформы с личным кабинетом пользователя и аналитикой в реальном времени.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop',
-    tags: ['FinTech', 'SaaS', 'Dashboard', 'SEO'],
-    link: 'https://example.com/nexus',
+    id: 'veiryx-store',
+    title: 'VEIRYX STORE',
+    category: 'E-Commerce / Премиум онлайн-магазин',
+    description: 'Современный интернет-магазин с каталогом премиум-товаров, быстрым чекаутом и доставкой по всему Казахстану.',
+    image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=1000&auto=format&fit=crop',
+    tags: ['E-Commerce', 'Online Store', 'Fast Checkout', 'KZ Delivery'],
+    link: 'https://veiryx-store.web.app',
     isReal: true
   },
   {
-    id: 'architect-studio',
-    title: 'KUB ARCHITECTS',
-    category: 'Архитектурное бюро',
-    description: 'Портфолио-сайт архитектурной студии премиум-класса с фильтрацией проектов и минималистичной эстетикой.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop',
-    tags: ['Portfolio', 'Design', 'Minimalism', '3D'],
-    link: 'https://example.com/kub-arch',
+    id: 'babushka-shop',
+    title: 'BABUSHKA SHOP',
+    category: 'E-Commerce / Маркетплейс выпечки',
+    description: 'Уютный интернет-магазин выпечки и домашних товаров с поддержкой онлайн-заказов и быстрой доставкой.',
+    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1000&auto=format&fit=crop',
+    tags: ['E-Commerce', 'Firebase', 'WhatsApp Ordering', 'FoodTech'],
+    link: 'https://babushka-shop.web.app/',
     isReal: true
   },
   {
-    id: 'placeholder-project-4',
+    id: 'placeholder-project-kz',
     title: 'ВАШ ПРОЕКТ ЗДЕСЬ',
-    category: 'Ваша ниша бизнес-решения',
-    description: 'Плейсхолдер для нового проекта. Нажмите, чтобы обсудить разработку вашего сайта под ключ.',
+    category: 'Ваша ниша в Казахстане',
+    description: 'Плейсхолдер для вашего будущего сайта. Нажмите, чтобы оставить заявку на разработку под ключ в Казахстане.',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop',
-    tags: ['Скоро запуск', 'Заявка'],
+    tags: ['Казахстан', 'Разработка под ключ', 'Заявка'],
     link: '#contact',
     isPlaceholder: true
   }
 ];
 
-// Mock data for demo niche categories & landing content
+// Mock data for demo niche categories in Kazakhstan (Prices in ₸)
 export const demoCategories = [
   {
     id: 'store',
     slug: 'store',
     title: 'Интернет-магазин',
-    subtitle: 'High-Conversion E-Commerce Platform',
+    subtitle: 'High-Conversion E-Commerce Platform (₸)',
     iconName: 'ShoppingBag',
-    description: 'Современный интернет-магазин с каталогом, фильтрацией товаров, корзиной и быстрым чекаутом для взрывного роста продаж.',
+    description: 'Современный интернет-магазин с каталогом, фильтрацией товаров, корзиной и быстрым чекаутом для продаж по всему Казахстану.',
     image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=1000&auto=format&fit=crop',
-    features: ['Фильтрация и поиск', 'Интерактивная корзина', 'Мобильный чекаут', 'Интеграция с СКУD / 1С'],
-    heroTitle: 'Магазин дизайнерской мебели & декора',
-    heroDescription: 'Премиальное качество для вашего дома. Бесплатная доставка при заказе от 50 000 ₽.',
+    features: ['Фильтрация и поиск', 'Интерактивная корзина', 'Мобильный чекаут', 'Интеграция с Kaspi / Halyk'],
+    heroTitle: 'Магазин дизайнерской мебели & декора в Казахстане',
+    heroDescription: 'Премиальное качество для вашего дома. Бесплатная доставка по Алматы и Астане при заказе от 50 000 ₸.',
     products: [
-      { id: 1, name: 'Кресло Lounge Minimal', price: '45 000 ₽', image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?q=80&w=600&auto=format&fit=crop', tag: 'Хит' },
-      { id: 2, name: 'Стильный торшер NORDIC', price: '18 500 ₽', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=600&auto=format&fit=crop', tag: 'Новинка' },
-      { id: 3, name: 'Стол из массива дуба', price: '89 000 ₽', image: 'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?q=80&w=600&auto=format&fit=crop', tag: 'Премиум' },
-      { id: 4, name: 'Диван Loft Velvet', price: '120 000 ₽', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=600&auto=format&fit=crop', tag: 'Топ' }
+      { id: 1, name: 'Кресло Lounge Minimal', price: '185 000 ₸', image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?q=80&w=600&auto=format&fit=crop', tag: 'Хит' },
+      { id: 2, name: 'Стильный торшер NORDIC', price: '75 000 ₸', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=600&auto=format&fit=crop', tag: 'Новинка' },
+      { id: 3, name: 'Стол из массива дуба', price: '360 000 ₸', image: 'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?q=80&w=600&auto=format&fit=crop', tag: 'Премиум' },
+      { id: 4, name: 'Диван Loft Velvet', price: '490 000 ₸', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=600&auto=format&fit=crop', tag: 'Топ' }
     ]
   },
   {
     id: 'education',
     slug: 'education',
     title: 'Образовательная платформа / Курсы',
-    subtitle: 'EdTech Learning Experience',
+    subtitle: 'EdTech Learning Experience (₸)',
     iconName: 'GraduationCap',
     description: 'Интерактивный лендинг курсов или онлайн-школы с презентацией программы, спикеров и системой записи.',
     image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1000&auto=format&fit=crop',
-    features: ['Модули обучения', 'Карточки экспертов', 'Тарифная сетка', 'Форма бронирования места'],
+    features: ['Модули обучения', 'Карточки экспертов', 'Тарифная сетка (₸)', 'Форма бронирования места'],
     heroTitle: 'Курс: Продуктовый Дизайнер 2026',
-    heroDescription: 'Освойте профессию с нуля до Middle+ за 6 месяцев с гарантией стажировки в продуктовых компаниях.',
+    heroDescription: 'Освойте профессию с нуля до Middle+ за 6 месяцев с гарантией стажировки в продуктовых компаниях Казахстана.',
     modules: [
       { num: '01', title: 'Основы UX/UI и исследование пользователей', duration: '4 недели' },
       { num: '02', title: 'Прототипирование и Figma Masterclass', duration: '6 недель' },
@@ -84,12 +84,12 @@ export const demoCategories = [
     id: 'services',
     slug: 'services',
     title: 'Сайт услуг (B2B / B2C)',
-    subtitle: 'Modern Business Service Website',
+    subtitle: 'Modern Business Service Website (₸)',
     iconName: 'Briefcase',
     description: 'Универсальный корпоративный сайт для бизнеса услуг с фокусом на доверие, экспертность и захват лидов.',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop',
     features: ['Блок преимуществ', 'Прайс-лист / калькулятор', 'Кейсы и отзывы', 'Конверсионная форма'],
-    heroTitle: 'Комплексный консалтинг & Автоматизация бизнеса',
+    heroTitle: 'Комплексный консалтинг & Автоматизация бизнеса в Казахстане',
     heroDescription: 'Помогаем компаниям масштабировать выручку и внедрять современное ПО за 30 дней.',
     servicesList: [
       { title: 'Аудит бизнес-процессов', desc: 'Поиск узких мест и составляющих эффективности вашей команды.' },
@@ -102,12 +102,12 @@ export const demoCategories = [
     id: 'clinic',
     slug: 'clinic',
     title: 'Клиника / Медицинский центр',
-    subtitle: 'Trust-focused Healthcare Platform',
+    subtitle: 'Trust-focused Healthcare Platform (₸)',
     iconName: 'Activity',
     description: 'Премиальный медицинский сайт с записью к врачам, каталогом услуг, лицензиями и отзывами пациентов.',
     image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1000&auto=format&fit=crop',
-    features: ['Запись к врачу', 'Профили специалистов', 'Спецпредложения / Чек-апы', 'Лицензии и стандарты'],
-    heroTitle: 'Центр современной медицины и косметологии',
+    features: ['Запись к врачу', 'Профили специалистов', 'Спецпредложения / Чек-апы', 'Лицензии РК'],
+    heroTitle: 'Центр современной медицины и косметологии в Алматы',
     heroDescription: 'Забота о вашем здоровье на уровне мировых стандартов. Опытные врачи экспертного класса.',
     doctors: [
       { name: 'Др. Александр Смирнов', spec: 'Главный врач, Хирург-ортопед', exp: 'Стаж 18 лет' },
@@ -119,12 +119,12 @@ export const demoCategories = [
     id: 'cleaning',
     slug: 'cleaning',
     title: 'Клининговые услуги',
-    subtitle: 'High-Converting Cleaning Service Site',
+    subtitle: 'High-Converting Cleaning Service Site (₸)',
     iconName: 'Sparkles',
-    description: 'Динамичный сайт клининговой компании с быстрым калькулятором стоимости, описанием услуг и гарантиями.',
+    description: 'Динамичный сайт клининговой компании с быстрым калькулятором стоимости, описанием услуг и гарантией чистоты.',
     image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1000&auto=format&fit=crop',
     features: ['Быстрый расчет площади', 'Безопасная эко-химия', 'Страхование имущества', 'Выезд за 60 минут'],
-    heroTitle: 'Профессиональный клининг квартир и офисов',
+    heroTitle: 'Профессиональный клининг квартир и офисов в Казахстане',
     heroDescription: 'Идеальная чистота без вашего участия. Используем эко-средства и немецкое оборудование Kärcher.',
     servicesList: [
       { title: 'Генеральная уборка', desc: 'Тщательная очистка всех поверхностей, мебели и труднодоступных мест.' },
@@ -139,7 +139,7 @@ export const agencyWorkflow = [
   {
     step: '01',
     title: 'Бриф & Аналитика',
-    description: 'Изучаем ваш бизнес, конкурентов и целевую аудиторию. Формируем четкую цель и структуру будущего сайта.'
+    description: 'Изучаем ваш бизнес, конкурентов в Казахстане и целевую аудиторию. Формируем структуру будущего сайта.'
   },
   {
     step: '02',
@@ -148,8 +148,8 @@ export const agencyWorkflow = [
   },
   {
     step: '03',
-    title: 'Разработка',
-    description: 'Верстаем быстрый, адаптивный сайт на современном стеке React. Интегрируем необходимые сервисы, CRM и формы.'
+    title: 'Разработка & Firebase',
+    description: 'Верстаем быстрый, адаптивный сайт на React. Интегрируем Firebase для сбора лидов, CRM и формы.'
   },
   {
     step: '04',

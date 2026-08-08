@@ -8,6 +8,7 @@ import { Home } from './pages/Home';
 import { Portfolio } from './pages/Portfolio';
 import { DemoList } from './pages/DemoList';
 import { DemoDetail } from './pages/DemoDetail';
+import { Admin } from './pages/Admin';
 
 import './styles/variables.css';
 
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="/portfolio" element={<Portfolio onOpenContactModal={handleOpenContactModal} />} />
           <Route path="/demo" element={<DemoList onOpenContactModal={handleOpenContactModal} />} />
           <Route path="/demo/:niche" element={<DemoDetail onOpenContactModal={handleOpenContactModal} />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
 
