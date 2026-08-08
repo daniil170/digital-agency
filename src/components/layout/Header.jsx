@@ -31,7 +31,7 @@ export const Header = ({ onOpenContactModal }) => {
     <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
       <div className="container header-container">
         <Link to="/" className="logo">
-          <span className="logo-accent">NEBULA</span>
+          <span className="logo-accent">WEBORA</span>
           <span className="logo-sub">AGENCY</span>
         </Link>
 

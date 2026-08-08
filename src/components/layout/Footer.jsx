@@ -10,7 +10,7 @@ export const Footer = ({ onOpenContactModal }) => {
         <div className="footer-top">
           <div className="footer-brand">
             <Link to="/" className="logo">
-              <span className="logo-accent">NEBULA</span>
+              <span className="logo-accent">WEBORA</span>
               <span className="logo-sub">AGENCY</span>
             </Link>
             <p className="footer-tagline">
@@ -61,7 +61,7 @@ export const Footer = ({ onOpenContactModal }) => {
         </div>
 
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} NEBULA AGENCY. Работаем по всему Казахстану.</p>
+          <p>© {new Date().getFullYear()} WEBORA AGENCY. Работаем по всему Казахстану.</p>
           <div className="footer-bottom-links">
             <Link to="/admin" className="footer-admin-link">
               <Shield size={14} /> Панель лидов
