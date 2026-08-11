@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { 
-  getFirestore, collection, addDoc, getDocs, updateDoc, doc, query, orderBy, serverTimestamp 
+  getFirestore, collection, addDoc, getDocs, updateDoc, doc, query, orderBy, serverTimestamp, writeBatch 
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -79,6 +79,31 @@ export const updateLeadStatus = async (leadId, newStatus) => {
     return await fetchLeads();
   } catch (error) {
     console.error('Error updating lead status in Firestore:', error);
+    throw error;
+  }
+};
+
+export const bulkDeleteLeads = async (leadIds) => {
+  try {
+    // Firestore batch writes are limited to 500 operations
+    // If there are more than 500, we should chunk them.
+    const chunks = [];
+    for (let i = 0; i < leadIds.length; i += 500) {
+      chunks.push(leadIds.slice(i, i + 500));
+    }
+
+    for (const chunk of chunks) {
+      const batch = writeBatch(db);
+      chunk.forEach((id) => {
+        const leadRef = doc(db, 'leads', id);
+        batch.delete(leadRef);
+      });
+      await batch.commit();
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Error bulk deleting leads in Firestore:', error);
     throw error;
   }
 };

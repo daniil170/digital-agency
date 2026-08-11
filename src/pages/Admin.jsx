@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  ShieldCheck, RefreshCw, Send, Lock, Clock, 
-  CheckCircle2, AlertCircle, Filter, LogOut, KeyRound
+  Lock, LogOut, KeyRound, Search, Table, RefreshCw, Sparkles, AlertCircle, Send, CheckCircle2
 } from 'lucide-react';
 import { 
   fetchLeads, updateLeadStatus, checkIsAdminAuthenticated, loginAdmin, logoutAdmin 
@@ -9,7 +8,11 @@ import {
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Section } from '../components/ui/Section';
+import { LeadFinderForm } from '../components/admin/LeadFinderForm';
+import { LeadsTable } from '../components/admin/LeadsTable';
+import { LeadsKanban } from '../components/admin/LeadsKanban';
 import './Admin.css';
+import '../components/admin/AdminLeads.css';
 
 export const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -18,7 +21,7 @@ export const Admin = () => {
 
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [statusFilter, setStatusFilter] = useState('all');
+  const [activeTab, setActiveTab] = useState('finder'); // 'finder' | 'table'
 
   useEffect(() => {
     const authState = checkIsAdminAuthenticated();
@@ -60,36 +63,6 @@ export const Admin = () => {
     } else {
       loadLeads();
     }
-  };
-
-  const filteredLeads = leads.filter(l => {
-    if (statusFilter === 'all') return true;
-    return l.status === statusFilter;
-  });
-
-  const getStatusBadge = (status) => {
-    switch (status) {
-      case 'new':
-        return <span className="status-tag tag-new"><AlertCircle size={12} /> Новый</span>;
-      case 'in_progress':
-        return <span className="status-tag tag-progress"><Clock size={12} /> В работе</span>;
-      case 'closed':
-        return <span className="status-tag tag-closed"><CheckCircle2 size={12} /> Завершен</span>;
-      default:
-        return <span className="status-tag tag-new">Новый</span>;
-    }
-  };
-
-  const formatContactLink = (contact) => {
-    if (!contact) return '#';
-    if (contact.startsWith('@')) {
-      return `https://t.me/${contact.replace('@', '')}`;
-    }
-    const cleanPhone = contact.replace(/[^0-9]/g, '');
-    if (cleanPhone.length >= 10) {
-      return `https://wa.me/${cleanPhone}`;
-    }
-    return `https://t.me/cunicad`;
   };
 
   // If NOT Authenticated: Show PIN Login Form
@@ -145,7 +118,7 @@ export const Admin = () => {
         id="admin-dashboard"
         badge="Защищенный доступ"
         title="Панель управления лидами (WEBORA)"
-        description="Конфиденциальный список клиентов и заявок с вашего сайта. Доступ разрешен только администратору."
+        description="Мониторинг заявок, парсинг бизнесов без сайтов (2GIS / Overpass) и генерация AI-офферов."
         className="admin-section"
       >
         <div className="admin-top-action-bar">
@@ -158,104 +131,78 @@ export const Admin = () => {
           <div className="admin-stats-summary">
             <div className="stat-card">
               <span className="stat-val">{leads.length}</span>
-              <span className="stat-lbl">Всего заявок</span>
+              <span className="stat-lbl">Всего лидов</span>
             </div>
             <div className="stat-card accent">
-              <span className="stat-val">{leads.filter(l => l.status === 'new').length}</span>
-              <span className="stat-lbl">Новых лидов</span>
+              <span className="stat-val">{leads.filter(l => (l.status || 'new') === 'new').length}</span>
+              <span className="stat-lbl">Новых</span>
             </div>
             <div className="stat-card progress">
-              <span className="stat-val">{leads.filter(l => l.status === 'in_progress').length}</span>
-              <span className="stat-lbl">В работе</span>
+              <span className="stat-val">{leads.filter(l => ['contacted', 'in_progress', 'replied'].includes(l.status)).length}</span>
+              <span className="stat-lbl">В работе / Связались</span>
             </div>
           </div>
 
-          <div className="admin-filter-bar">
-            <div className="filter-group">
-              <Filter size={16} />
-              <span>Фильтр по статусу:</span>
-              <button 
-                className={`filter-pill ${statusFilter === 'all' ? 'active' : ''}`}
-                onClick={() => setStatusFilter('all')}
-              >
-                Все ({leads.length})
-              </button>
-              <button 
-                className={`filter-pill ${statusFilter === 'new' ? 'active' : ''}`}
-                onClick={() => setStatusFilter('new')}
-              >
-                Новые
-              </button>
-              <button 
-                className={`filter-pill ${statusFilter === 'in_progress' ? 'active' : ''}`}
-                onClick={() => setStatusFilter('in_progress')}
-              >
-                В работе
-              </button>
-              <button 
-                className={`filter-pill ${statusFilter === 'closed' ? 'active' : ''}`}
-                onClick={() => setStatusFilter('closed')}
-              >
-                Завершенные
-              </button>
-            </div>
-
-            <Button variant="secondary" size="small" icon={RefreshCw} onClick={loadLeads}>
-              Обновить данные
-            </Button>
+          {/* Section Navigation Tabs */}
+          <div className="admin-tab-switcher">
+            <button 
+              className={`admin-tab-btn ${activeTab === 'finder' ? 'active' : ''}`}
+              onClick={() => setActiveTab('finder')}
+            >
+              <Sparkles size={16} /> Поиск лидов (Lead Finder)
+            </button>
+            <button 
+              className={`admin-tab-btn ${activeTab === 'table' ? 'active' : ''}`}
+              onClick={() => setActiveTab('table')}
+            >
+              <Table size={16} /> Таблица ({leads.length})
+            </button>
+            <button 
+              className={`admin-tab-btn ${activeTab === 'kanban' ? 'active' : ''}`}
+              onClick={() => setActiveTab('kanban')}
+            >
+              <CheckCircle2 size={16} /> Доска (Канбан)
+            </button>
           </div>
         </div>
 
-        {loading ? (
-          <div className="admin-loading">
-            <RefreshCw className="spin-icon" size={32} />
-            <p>Загрузка заявок из Firebase...</p>
+        {/* Tab 1: Lead Finder & Main View */}
+        {activeTab === 'finder' && (
+          <div className="finder-tab-content">
+            <LeadFinderForm onLeadsUpdated={loadLeads} />
+            <div className="section-divider">
+              <h3>База лидов</h3>
+            </div>
+            <LeadsTable 
+              leads={leads} 
+              onStatusChange={handleStatusChange}
+              onRefresh={loadLeads}
+              loading={loading}
+            />
           </div>
-        ) : filteredLeads.length === 0 ? (
-          <Card className="empty-leads">
-            <p>Заявок с выбранным фильтром не найдено.</p>
-          </Card>
-        ) : (
-          <div className="leads-grid">
-            {filteredLeads.map((lead) => (
-              <Card key={lead.id} className={`lead-card lead-border-${lead.status}`}>
-                <div className="lead-header">
-                  <h3 className="lead-name">{lead.name || 'Анонимный клиент'}</h3>
-                  {getStatusBadge(lead.status)}
-                </div>
+        )}
 
-                <div className="lead-meta">
-                  <p><strong>Ниша/город:</strong> {lead.businessType || 'Не указано'}</p>
-                  <p><strong>Контакты:</strong> <span className="lead-contact-text">{lead.contact}</span></p>
-                  {lead.budget && <p><strong>Бюджет (₸):</strong> {lead.budget}</p>}
-                  <p className="lead-time">
-                    <Clock size={12} /> {lead.createdAt ? new Date(lead.createdAt).toLocaleString('ru-RU') : 'Недавно'}
-                  </p>
-                </div>
+        {/* Tab 2: Full Leads Table */}
+        {activeTab === 'table' && (
+          <div className="table-tab-content">
+            <LeadsTable 
+              leads={leads} 
+              onStatusChange={handleStatusChange}
+              onRefresh={loadLeads}
+              loading={loading}
+            />
+          </div>
+        )}
 
-                <div className="lead-actions">
-                  <a 
-                    href={formatContactLink(lead.contact)} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="lead-chat-btn"
-                  >
-                    <Send size={14} /> Написать клиенту
-                  </a>
-
-                  <div className="status-dropdown">
-                    <select 
-                      value={lead.status || 'new'} 
-                      onChange={(e) => handleStatusChange(lead.id, e.target.value)}
-                    >
-                      <option value="new">Новый</option>
-                      <option value="in_progress">В работе</option>
-                      <option value="closed">Завершен</option>
-                    </select>
-                  </div>
-                </div>
-              </Card>
-            ))}
+        {/* Tab 3: Kanban Board */}
+        {activeTab === 'kanban' && (
+          <div className="kanban-tab-content">
+            <LeadsKanban 
+              leads={leads} 
+              onStatusChange={handleStatusChange}
+              onRefresh={loadLeads}
+              loading={loading}
+            />
           </div>
         )}
       </Section>

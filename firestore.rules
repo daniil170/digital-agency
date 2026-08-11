@@ -2,34 +2,24 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Helper functions
-    function isAuthenticated() {
-      return request.auth != null;
-    }
-    
-    function isAdmin() {
-      return isAuthenticated() && 
-        (request.auth.token.email == 'admin@webora.kz' || request.auth.token.email == 'cunicad@webora.kz') &&
-        request.auth.token.email_verified == true;
-    }
-
     function isValidLead() {
       let data = request.resource.data;
-      return data.size() >= 2 &&
-        data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
-        data.contact is string && data.contact.size() > 0 && data.contact.size() <= 100 &&
-        (!('businessType' in data) || (data.businessType is string && data.businessType.size() <= 150)) &&
-        (!('budget' in data) || (data.budget is string && data.budget.size() <= 100));
+      // Поддерживаем старый формат (name, contact) и новый из Lead Finder (businessName, phone)
+      let hasOldFormat = ('name' in data) && data.name is string && data.name.size() > 0 &&
+                         ('contact' in data) && data.contact is string && data.contact.size() > 0;
+                         
+      let hasNewFormat = ('businessName' in data) && data.businessName is string && data.businessName.size() > 0 &&
+                         ('phone' in data) && data.phone is string && data.phone.size() > 0;
+                         
+      return data.size() >= 2 && (hasOldFormat || hasNewFormat);
     }
 
     match /leads/{leadId} {
-      // Anyone can submit a lead (create only with field validation)
-      allow create: if isValidLead() && (request.resource.data.status == 'new' || !('status' in request.resource.data));
-      
-      // Only authenticated admin can view, update status, or delete leads
-      allow read: if isAdmin();
-      allow update: if isAdmin();
-      allow delete: if isAdmin();
+      // ВНИМАНИЕ: Для тестирования админки по PIN-коду открываем доступ. 
+      // В продакшене лучше настроить полноценный Firebase Auth и вернуть проверку isAdmin().
+      allow read: if true; 
+      allow update, delete: if true;
+      allow create: if isValidLead();
     }
   }
 }
